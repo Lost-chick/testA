@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2020-02-09 13:07:25
- * @LastEditTime : 2020-02-09 17:42:09
- * @LastEditors  : Please set LastEditors
- * @Description: In User Settings Editodal
- * @FilePath: \component\src\components\Madal\index.js
- */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import NewPortal from '../NewPortal'

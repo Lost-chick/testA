@@ -1,0 +1,35 @@
+  .tree-node {
+    .tree-hover {
+      .tree-operation {
+        visibility: hidden;
+      }
+      &:hover {
+        background-color: rgb(207, 204, 204);
+        .tree-operation {
+          visibility: visible;
+        }
+      }
+      .space {
+        display: inline-block;
+        margin-left: 12px;
+      }
+      span {
+        margin-right: 5px;
+        cursor: pointer;
+      }
+      .tree-operation {
+        float: right;
+        color: rgb(97, 120, 223);     
+      }
+    }
+  
+    &>ul {
+      margin: 0;
+      display: none;
+      &.show {
+        display: block;
+      }
+    }
+  }
+
+
