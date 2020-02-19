@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-18 17:32:48
- * @LastEditTime: 2020-02-18 22:36:45
+ * @LastEditTime: 2020-02-19 17:57:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \testA\src\components\Tree\index.js
@@ -19,37 +19,37 @@ class Tree extends Component {
         {
           id: 1,
           pid: 0,
-          name: '一级菜单'
+          name: '一级菜单1-1'
         },
         {
           id: 2,
           pid: 1,
-          name: '二级菜单'
+          name: '二级菜单2-1'
         },
         {
           id: 3,
           pid: 1,
-          name: '二级菜单'
+          name: '二级菜单2-2'
         },
         {
           id: 4,
           pid: 2,
-          name: '三级菜单'
+          name: '三级菜单3-1'
         },
         {
           id: 5,
           pid: 3,
-          name: '三级菜单'
+          name: '三级菜单3-2'
         },
         {
           id: 6,
           pid: 3,
-          name: '三级菜单'
+          name: '三级菜单3-3'
         },
         {
           id: 7,
           pid: 0,
-          name: '一级菜单'
+          name: '一级菜单1-2'
         },
       ],
       diaLogVisible: false,
@@ -85,6 +85,8 @@ class Tree extends Component {
     });
     return parentId
   }
+  // 获取兄弟元素
+
 
   // 打开弹框
   showDialog = (id) => {
@@ -100,13 +102,46 @@ class Tree extends Component {
     })
     this.setState({ treeData, diaLogVisible: false, value: '', id: '' })
   }
+  // 由id求其索引位置
+  isThere = (id, data = []) => {
+    // const { treeData } = this.state;
+    let index;
+    for (let [key, value] of Object.entries(data)) {
+      if (value.id === id) {
+        index = key;
+        break;
+      }
+    };
+    return index;
+  }
+  // 求兄弟结合
+  getBrothers = (id) => {
+    return this.getChild(this.getParent(id))
+  }
+  // 移动方法,bool为true上移动，false下移动
+  move = (id, bool) => {
+    const { treeData } = this.state;
+    const brothers = this.getBrothers(id);
+    const indexSelf = Number(this.isThere(id, brothers));
+    // console.log(indexSelf);
+    const preId = bool ? brothers[indexSelf - 1].id : brothers[indexSelf + 1].id;
+    const preIndex = this.isThere(preId, treeData);
+    const nowIndex = this.isThere(id, treeData);
+    console.log(preIndex, nowIndex);
+    // let proxy;
+    // proxy = treeData[nowIndex];
+    // treeData[nowIndex] = treeData[preIndex];
+    // treeData[preIndex] = proxy;
+    [treeData[nowIndex], treeData[preIndex]] = [treeData[preIndex], treeData[nowIndex]];
+    this.setState({ treeData })
+  }
   // 上移
   moveUp = (id) => {
-    console.log(id)
+    this.move(id, true)
   }
   // 下移
   moveDown = (id) => {
-    console.log(id)
+    this.move(id, false)
   }
   // 删除
   deleteItem = (id) => {

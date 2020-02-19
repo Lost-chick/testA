@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-02-18 16:47:05
- * @LastEditTime: 2020-02-18 22:32:00
+ * @LastEditTime: 2020-02-18 22:54:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \testA\src\components\Tree\index.js
@@ -40,7 +40,7 @@ class TreeNode extends Component {
             {!isThree && <span
               onClick={addChild}
             >添加下一级</span>}
-            {pid ? <span onClick={deleteItem}>删除</span> : null}
+            <span onClick={deleteItem}>删除</span>
           </div>
         </div>
 
